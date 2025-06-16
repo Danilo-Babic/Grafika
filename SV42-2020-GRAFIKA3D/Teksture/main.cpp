@@ -95,7 +95,7 @@ unsigned int cubeIndices[] = {
     // Left face
     16, 17, 18, 18, 19, 16,
     // Right face
-    20, 21, 22, 22, 23, 20
+    20, 22, 21, 20, 23, 22
     // Top and Bottom faces su izostavljene
 };
 // Ground vertices
@@ -177,9 +177,9 @@ int main() {
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     glEnable(GL_DEPTH_TEST);
-    //glEnable(GL_CULL_FACE);
-    //glCullFace(GL_FRONT);       // Sakrivaj zadnje strane
-    //glFrontFace(GL_CCW);       // Koristi counter-clockwise kao prednju stranu
+    glEnable(GL_CULL_FACE);
+    glCullFace(GL_BACK);       // Sakrivaj zadnje strane
+    glFrontFace(GL_CCW);       // Koristi counter-clockwise kao prednju stranu
 
     unsigned shader = createShader("basic.vert", "basic.frag");
     textShaderProgram = createShader("text.vert", "text.frag");
@@ -191,7 +191,7 @@ int main() {
          1000.0f, 0.0f,  1000.0f, groundColor.r, groundColor.g, groundColor.b,
         -1000.0f, 0.0f,  1000.0f, groundColor.r, groundColor.g, groundColor.b,
     };
-    unsigned int planeIndices[] = { 0, 1, 2, 2, 3, 0 };
+    unsigned int planeIndices[] = { 0, 2, 1, 0, 3, 2 };
 
     unsigned int groundVAO, groundVBO, groundEBO;
     glGenVertexArrays(1, &groundVAO);
